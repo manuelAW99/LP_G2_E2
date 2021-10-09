@@ -15,7 +15,7 @@ class Node
 template<typename T>
 class Double_Linked_List
 {
-  private:
+  public:
     shared_ptr< Node<T> > head, tail;
     int size;
   public:
@@ -88,5 +88,6 @@ int main()
 {
   Double_Linked_List<int> temp;
   temp.Add(2);
-  
+  int a = temp.head->data;
+  cout << a << endl;
 }
