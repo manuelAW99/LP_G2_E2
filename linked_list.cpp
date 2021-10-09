@@ -1,30 +1,28 @@
 #include<iostream>
-#include<stdio.h>
-#include<stdlib.h>
+#include<memory>
 
 using namespace std;
-
-class Node
+template<typename T>
+class Node 
 {
-  public:
-    void *data;
-    Node *previous;
-    Node *next;
-
+  T data;
+  std::shared_ptr<Node<T>> previous;
+  std::shared_ptr<Node<T>> next;
+  Node(){};
+  Node(T data): data(data){};
 };
-
+template<typename T>
 class Double_Linked_List
 {
   private:
-    Node *head, *tail;
+    std::shared_ptr<Node<T>> head, tail;
     int size;
   public:
-    Double_Linked_List();//default constructor
+    Double_Linked_List(): size(0){};
 
-    void Add(void *data)
+    void Add(T data)
     {
-      Node *temp = (Node*)malloc(sizeof(Node));
-      temp->data = data;
+      Node<T> temp = std::make_shared<Node<T>>(data);
       if (size == 0)
       {
         head = temp;
@@ -44,7 +42,8 @@ class Double_Linked_List
     void* operator [](int index)
     {
       if (index >= size || index < size) throw "Index out of range";
-      Node *temp = head;
+      std::shared_ptr<Node<T>> temp = std::make_shared<Node<T>>();
+      temp = head;
       int current = 0;
 
       while(index != current)
@@ -54,12 +53,12 @@ class Double_Linked_List
       }
       return temp->data;
     };
-    void Remove (void* removing)
+    void Remove (T removing)
     {
-      Node *temp = (Node*)malloc(sizeof(Node));
+      std::shared_ptr<Node<T>> temp = std::make_shared<Node<T>>();
       temp->next = head;
       
-      while (&temp->data != &removing)
+      while (temp->data != &removing)
         temp = temp->next;
       
       temp->previous->next = temp->next;
@@ -68,7 +67,8 @@ class Double_Linked_List
     void Remove_At (int index)
     {
       if (index >= size || index < size) throw "Index out of range";
-      Node *temp = head;
+      std::shared_ptr<Node<T>> temp = std::make_shared<Node<T>>();
+      temp = head;
       int current = 0;
 
       while(index != current)
