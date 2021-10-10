@@ -75,6 +75,11 @@ class Double_Linked_List
 
     }
 
+    Double_Linked_List(vector <T> list)
+    {
+      for_each(list.begin(), list.end(), [this](T n) {Add(n);});
+    }
+
     Double_Linked_List(std::initializer_list<T> list)
     {
       for_each(list.begin(), list.end(), [this](T n) {Add(n);});
@@ -82,7 +87,7 @@ class Double_Linked_List
 
     T operator [](int index)
     {
-      if (index >= size || index < size) throw "Index out of range";
+      if (index >= size || index < 0) throw "Index out of range";
       auto temp = head;
       int current = 0;
 
