@@ -4,15 +4,17 @@
 #include <algorithm>
 #include <iterator>
 
+using namespace std;
+template<typename R, typename... T>
+using function = R(*)(T...);
 template<typename T>
-using sptr = std::shared_ptr<T>;
+using sptr = shared_ptr<T>;
 template<typename T>
 class Node 
 {
   public:
     T data;
-    sptr < Node<T> > previous;
-    sptr < Node<T> > next;
+    sptr < Node<T> > previous = nullptr, next = nullptr;
     Node(){};
     Node(T data): data(data){};
 };
@@ -20,14 +22,14 @@ template<typename T>
 class Double_Linked_List
 {
   public:
-    sptr < Node<T> > head, tail;
-    int size;
+    sptr < Node<T> > head = nullptr, tail = nullptr;
+    int size = 0;
   public:
     Double_Linked_List(): size(0){};
 
     Double_Linked_List(T data)
     {
-      Add(data);
+      Add_Last(data);
     }
 
     //Copy
@@ -36,8 +38,8 @@ class Double_Linked_List
       auto temp = list.head;
       while(temp != nullptr)
       {
-        Add(temp.data);
-        temp = temp.next;
+        Add_Last(temp->data);
+        temp = temp->next;
       }
     }
 
@@ -57,7 +59,7 @@ class Double_Linked_List
       auto temp = list.head;
       while(temp != nullptr)
       {
-        Add(temp.data);
+        Add_Last(temp.data);
         temp = temp.next;
       }
 
@@ -77,40 +79,42 @@ class Double_Linked_List
 
     Double_Linked_List(vector <T> list)
     {
-      for_each(list.begin(), list.end(), [this](T n) {Add(n);});
+      for_each(list.begin(), list.end(), [this](T n) {Add_Last(n);});
     }
 
-    Double_Linked_List(std::initializer_list<T> list)
+    Double_Linked_List(initializer_list<T> list)
     {
-      for_each(list.begin(), list.end(), [this](T n) {Add(n);});
+      for_each(list.begin(), list.end(), [this](T n) {Add_Last(n);});
     }
 
     T operator [](int index)
     {
-      if (index >= size || index < 0) throw "Index out of range";
+      return At(index);
+    }
+
+    T At(int index)
+    {
+      if (index >= size || index < 0) throw ("Index out of range");
       auto temp = head;
       int current = 0;
 
       while(index != current)
       {
-        temp = temp.next;
+        temp = temp->next;
         current++;
       }
-      return temp.data;
-    };
+      return temp->data;
+    }
 
-    void Add(T data)
+    void Add_Last(T data) noexcept
     {
-      sptr < Node<T> > temp (new Node<T>(data));
-      
-      
+      sptr < Node<T> > temp (new Node<T>(data));      
       if (size == 0)
       {
         head = temp;
         tail = temp;
-        temp->previous = head;
-        temp->next = tail;
-        size++;
+        //temp->previous = head;
+        //temp->next = tail;
       }
       else
       {
@@ -118,35 +122,79 @@ class Double_Linked_List
         temp->previous = tail;
         tail = temp;
       } 
-      
+      size++;
     };
     
-    void Remove (T removing)
+    
+    void Remove_Last ()
     {
+      if (size > 1)
+      {
+        tail = tail->previous;
+        tail->next = nullptr;
+      }
+      else if (size == 1)
+      {
+        head = nullptr;
+        tail = nullptr;
+      }
+      else 
+      {
+        throw("No elements");
+      }
+      size--;
+      /*
       sptr < Node<T> > temp;
-      temp.next = head;
+      temp->next = head;
       
-      while (temp.data != removing)
-        temp = temp.next;
+      while (temp->data != removing)
+        temp = temp->next;
       
-      temp.previous.next = temp.next;
-      temp.next.previous = temp.next;
+      temp->previous->next = temp->next;
+      temp->next->previous = temp->next;
+      */
     }
     void Remove_At (int index)
     {
-      if (index >= size || index < size) throw "Index out of range";
-      sptr < Node<T> > temp;
-      temp = head;
+      if (index >= size || index < 0) throw ("Index out of range");
+      auto temp = head;
+      //temp = head;
       int current = 0;
 
       while(index != current)
       {
-        temp = temp.next;
+        temp = temp->next;
         current++;
       }
-      temp.previous.next = temp.next;
-      temp.next.previous = temp.next;
+      temp->previous->next = temp->next;
+      temp->next->previous = temp->next;
+      size--;
     }
+
+    template<typename R>
+    Double_Linked_List<R> Map(function<R, T> func)
+    {
+      Double_Linked_List<R> list;
+      for (int i = 0; i < size; i++)
+      {
+        list.Add_Last(func(At(i)));
+      }
+      return list;
+    }
+
+    void ToString()
+    {
+      cout<<"[";
+      auto current = head;
+      for (int i = 0; i < size; i++)
+      {
+        cout<<current->data;
+        current = current->next;
+        if (i+1 != size) cout<< ", ";
+      }
+      cout<<"]"<<endl;
+    }
+
     ~Double_Linked_List()
     {
       head = nullptr;
@@ -158,6 +206,17 @@ class Double_Linked_List
 int main()
 {
   Double_Linked_List<int> temp;
-  temp.Add(2);
-  
+  //temp.Add_Last(2);
+  //temp.Add_Last(3);
+  //temp.Add_Last(4);
+  Double_Linked_List<int> a{1,2,3,4};
+  a.Remove_Last();
+  a.Add_Last(5);
+  cout<<a.size<<endl;
+  a.Remove_At(2);
+  cout<<a[2]<<endl;
+  Double_Linked_List<int> b = {3,4,5,6};
+  Double_Linked_List<int> c;
+  c.ToString();
+  b.ToString();
 }
