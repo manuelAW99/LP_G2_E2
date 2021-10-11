@@ -113,8 +113,6 @@ class Double_Linked_List
       {
         head = temp;
         tail = temp;
-        //temp->previous = head;
-        //temp->next = tail;
       }
       else
       {
@@ -143,22 +141,11 @@ class Double_Linked_List
         throw("No elements");
       }
       size--;
-      /*
-      sptr < Node<T> > temp;
-      temp->next = head;
-      
-      while (temp->data != removing)
-        temp = temp->next;
-      
-      temp->previous->next = temp->next;
-      temp->next->previous = temp->next;
-      */
     }
     void Remove_At (int index)
     {
       if (index >= size || index < 0) throw ("Index out of range");
       auto temp = head;
-      //temp = head;
       int current = 0;
 
       while(index != current)
@@ -206,9 +193,9 @@ class Double_Linked_List
 int main()
 {
   Double_Linked_List<int> temp;
-  //temp.Add_Last(2);
-  //temp.Add_Last(3);
-  //temp.Add_Last(4);
+  temp.Add_Last(2);
+  temp.Add_Last(3);
+  temp.Add_Last(4);
   Double_Linked_List<int> a{1,2,3,4};
   a.Remove_Last();
   a.Add_Last(5);
