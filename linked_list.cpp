@@ -21,7 +21,7 @@ class Node
 template<typename T>
 class Double_Linked_List
 {
-  public:
+  private:
     sptr < Node<T> > head = nullptr, tail = nullptr;
     int size = 0;
   public:
@@ -59,10 +59,10 @@ class Double_Linked_List
       auto temp = list.head;
       while(temp != nullptr)
       {
-        Add_Last(temp.data);
-        temp = temp.next;
+        Add_Last(temp->data);
+        temp = temp->next;
       }
-
+      return *this;
     }
     //by Movement
     Double_Linked_List& operator= (Double_Linked_List&& list)
@@ -74,7 +74,7 @@ class Double_Linked_List
       swap(head, list.head);
       swap(tail, list.tail);
       swap(size, list.size);  
-
+      return *this;
     }
 
     Double_Linked_List(vector <T> list)
@@ -85,6 +85,11 @@ class Double_Linked_List
     Double_Linked_List(initializer_list<T> list)
     {
       for_each(list.begin(), list.end(), [this](T n) {Add_Last(n);});
+    }
+
+    T Length()
+    {
+      return size;
     }
 
     T operator [](int index)
@@ -142,6 +147,7 @@ class Double_Linked_List
       }
       size--;
     }
+
     void Remove_At (int index)
     {
       if (index >= size || index < 0) throw ("Index out of range");
@@ -190,20 +196,38 @@ class Double_Linked_List
     }
 };
 
+char Func(int c)
+{
+  return (char)c + 'A';
+}
+
 int main()
 {
-  Double_Linked_List<int> temp;
-  temp.Add_Last(2);
-  temp.Add_Last(3);
-  temp.Add_Last(4);
   Double_Linked_List<int> a{1,2,3,4};
   a.Remove_Last();
   a.Add_Last(5);
-  cout<<a.size<<endl;
+  cout<<a.Length()<<endl;
   a.Remove_At(2);
   cout<<a[2]<<endl;
+  a.ToString();
+
   Double_Linked_List<int> b = {3,4,5,6};
+  b.ToString();
+
   Double_Linked_List<int> c;
   c.ToString();
+  c = b;
+  c.ToString();
+
+  vector<int> d{1,2,4,74};
+  b = d;
   b.ToString();
+
+  Double_Linked_List<int> e(1);
+  e.Add_Last(5);
+  e.ToString();
+  cout<<e.At(1)<<endl;
+
+  Double_Linked_List<char> f = e.Map(Func);
+  f.ToString();
 }
