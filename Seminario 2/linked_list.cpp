@@ -1,5 +1,5 @@
-#include<iostream>
-#include<memory>
+#include <iostream>
+#include <memory>
 #include <vector>
 #include <algorithm>
 #include <iterator>
@@ -230,4 +230,7 @@ int main()
 
   Double_Linked_List<char> f = e.Map(Func);
   f.ToString();
+
+  Double_Linked_List<int> g(e);
+  g.ToString();
 }
