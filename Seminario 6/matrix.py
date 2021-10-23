@@ -7,7 +7,8 @@ class matrix:
             raise Exception("The number of columns must be positive")
         
         self._rows = rows
-        self._colums = columns
+        self._columns = columns
+        self._initial = initial
         self._type = type(initial)
         self._matrix = [[initial for i in range(columns)] for j in range(rows)]
     
@@ -15,7 +16,17 @@ class matrix:
         return self._rows
     
     def GetColumns(self):
-        return self._colums
+        return self._columns
+    
+    def IsSquare(self):
+        return self._rows == self._columns
+    
+    def Clone(self):
+        mclone = matrix(self.GetRows(), self.GetColumns(), self._initial)
+        for i in range(mclone.GetRows()):
+            for j in range(mclone.GetColumns()):
+                mclone[i,j] = self[i,j]
+        return mclone
     
     def Transpose(self):
         transpose = matrix(self.GetColumns(), self.GetRows())
@@ -48,8 +59,15 @@ class matrix:
     
     def __mul__(self, o):
         if not isinstance(o, matrix):
-            raise Exception("Both items must be matrices")
-        if self.GetColumns() != o.GetRows():
+            if isinstance(o, int) or isinstance(o, float):
+                mul = matrix(self.GetRows(),self.GetColumns(),.0)
+                for i in range(self.GetRows()):
+                    for j in range(self.GetColumns()):
+                        mul[i,j] = float(self[i,j] * o)
+                return mul
+            else: raise Exception("Both items must be matrices or a matrix and a scalar")
+            
+        elif self.GetColumns() != o.GetRows():
             raise Exception("The matrices cannot be multiplied(check the dimensions)")
         
         mul = matrix(self.GetRows(), o.GetColumns())
@@ -57,14 +75,28 @@ class matrix:
             for j in range(mul.GetColumns()):
                 c = [o[k, j] for k in range(o.GetRows())]
                 r = [self[i, k] for k in range(self.GetColumns())]
-
                 value = 0
                 for k in range(self.GetColumns()):
                     value += c[k] * r[k]
                 mul[i, j] = value
-        
+
         return mul
 
+    def __truediv__(self, o):
+        return self * (1/o)
+    
+    def __pow__(self, exponent):
+        if not isinstance(exponent, int):
+            raise Exception("The exponent must be integer")
+        if not self.IsSquare():
+            raise Exception("Matrix most be square")
+        if exponent > 0:
+            mpow = self.Clone()
+            for i in range(exponent - 1):
+                mpow *= self
+            return mpow
+        else: raise Exception("The exponent must be positive")
+    
     # Comparators
     def __eq__(self, o):
         if not isinstance(o, matrix):
@@ -143,6 +175,15 @@ class matrix:
         except: raise Exception("The index must be integers")       
         return self[index]
     
+    def __setattr__(self, name, value):
+        inpt = name.split("_")[1:]
+        index = []
+        try: 
+            index = [int(i) for i in inpt]
+        except: pass
+        if len(index) == 2 and type(index[0]) is int and type(index[1]) is int:
+            self[index] = value
+        else: super().__setattr__(name, value)
        
 class matrix_iter:
     def __init__(self, matrix):
@@ -165,7 +206,7 @@ class matrix_iter:
 
 
 a = matrix(3, 3, 0)
-a[0,0]=1
+a._0_0=11
 a[0,1]=2
 a[0,2]=3
 a[1,0]=3
@@ -175,6 +216,7 @@ a[2,0]=5
 a[2,1]=2
 a[2,2]=1
 print(a)
+print(a._0_0)
 
 b = matrix(3, 3, 0)
 b[0,0]=1
@@ -185,6 +227,9 @@ b[2,2]=1
 #b[2,0]=6
 #b[2,1]=1
 print(b)
-
+c = matrix(3,3,'c')
 print(a*b)
 print(3 in a)
+print(a**2)
+print(c*2)
+print(a/2)
