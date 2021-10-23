@@ -1,3 +1,4 @@
+
 class matrix:
     def __init__(self, rows:int = 0, columns:int = 0, initial = 0):
         if rows <= 0:
@@ -22,11 +23,11 @@ class matrix:
             [self._matrix[i][j] for i in range(self.GetColumns())] 
             for j in range(self.GetRows())]
         return transpose
-    
+
     # Operators   
     def __add__(self, o):
         if not isinstance(o, matrix):
-            raise Exception("You are not adding two matrices")
+            raise Exception("Both items must be matrices")
         if self.GetRows() != o.GetRows():
             raise Exception("The number of rows does not match")
         if self.GetColumns() != o.GetColumns():
@@ -49,10 +50,20 @@ class matrix:
         if not isinstance(o, matrix):
             raise Exception("Both items must be matrices")
         if self.GetColumns() != o.GetRows():
-            raise Exception("The matrices cannot be modified(check the dimensions)")
+            raise Exception("The matrices cannot be multiplied(check the dimensions)")
         
         mul = matrix(self.GetRows(), o.GetColumns())
-        NotImplemented
+        for i in range(mul.GetRows()):
+            for j in range(mul.GetColumns()):
+                c = [o[k, j] for k in range(o.GetRows())]
+                r = [self[i, k] for k in range(self.GetColumns())]
+
+                value = 0
+                for k in range(self.GetColumns()):
+                    value += c[k] * r[k]
+                mul[i, j] = value
+        
+        return mul
 
     # Comparators
     def __eq__(self, o):
@@ -70,6 +81,7 @@ class matrix:
     def __ne__(self, o):
         return not self == o
 
+
     # Containers
     def __iter__(self):
         return matrix_iter(self)
@@ -86,14 +98,21 @@ class matrix:
         return string
     
     def __len__(self):
-        return (self.GetRows(), self.GetColumns())
+       return self.GetRows() * self.GetColumns()
+
+    def __contains__(self, item):
+        if not isinstance(item, self._type):
+            raise Exception("The element must the same type of the matrix'elements")
+        
+        contains = False
+        for i in self:
+            if i == item:
+                contains = True
+                break
+        return contains
+
     
     def __getitem__(self, item):
-        if isinstance(item, int):
-            if item < 0 or item >= self.GetRows():
-                raise Exception("Index out of range")
-            return self._matrix[item]
-
         if len(item) == 2:
             if not isinstance(item[0], int) or not isinstance(item[1], int):
                 raise Exception("The index must be integers")
@@ -104,40 +123,27 @@ class matrix:
         raise Exception("Incorrect indexing(check numbers of index or type)")
     
     def __setitem__(self, item, value):
-        if isinstance(item, int):
-            if item < 0 or item >= self.GetRows():
-                raise Exception("Index out of range")
-            if type(self._matrix[item]) != type(value):
-                raise Exception("Diferents types")
-            self._matrix[item] = value
-
         if len(item) == 2:
             if not isinstance(item[0], int) or not isinstance(item[1], int):
                 raise Exception("The index must be integers")
             if item[0] < 0 or item[0] >= self.GetRows() or item[1] < 0 or item[1] >= self.GetColumns():
                 raise Exception("Index out of range") 
-            if type(self._matrix[item[0]][item[1]]) != type(value):
+            if self._type != type(value):
                 raise Exception("Diferents types")
             self._matrix[item[0]][item[1]] = value
             return
 
         raise Exception("Incorrect indexing(check numbers of index or type)")
     
-    def __contains__(self, item):
-        NotImplemented
-    
     # Attributes
     def __getattr__(self, item):
-        input = item.split("_")[1:]
+        inpt = item.split("_")[1:]
 
-        try: index = [int(i) for i in input]
-        except: raise Exception("The index must be integers")
-        
-        if len(index) == 1: return self[index[0]]
+        try: index = [int(i) for i in inpt]
+        except: raise Exception("The index must be integers")       
         return self[index]
     
-    
-    
+       
 class matrix_iter:
     def __init__(self, matrix):
         self._matrix = matrix
@@ -156,10 +162,29 @@ class matrix_iter:
         else:
             self._current = 0
             raise StopIteration("There are no more items in the matrix")
-        
-a = matrix(2,2, 0)
-c = 0
-for i in a:
-    continue
-a[1,1] = 3
-print(str(a))
+
+
+a = matrix(3, 3, 0)
+a[0,0]=1
+a[0,1]=2
+a[0,2]=3
+a[1,0]=3
+a[1,1]=1
+a[1,2]=1
+a[2,0]=5
+a[2,1]=2
+a[2,2]=1
+print(a)
+
+b = matrix(3, 3, 0)
+b[0,0]=1
+b[1,1]=1
+b[2,2]=1
+#b[0,1]=5
+#b[1,0]=2
+#b[2,0]=6
+#b[2,1]=1
+print(b)
+
+print(a*b)
+print(3 in a)
