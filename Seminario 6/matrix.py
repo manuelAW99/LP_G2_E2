@@ -168,6 +168,7 @@ class matrix:
     # Attributes
     def __getattr__(self, item):
         inpt = item.split("_")[1:]
+        index = []
 
         try: index = [int(i) for i in inpt]
         except: raise Exception("The index must be integers")       
@@ -175,14 +176,17 @@ class matrix:
     
     def __setattr__(self, name, value):
         inpt = name.split("_")[1:]
-        index = []
+
         try: 
             index = [int(i) for i in inpt]
-        except: pass
-        if len(index) == 2 and type(index[0]) is int and type(index[1]) is int:
             self[index] = value
-        else: super().__setattr__(name, value)
+        except: super().__setattr__(name, value)
+
+        #if len(index) == 2 and type(index[0]) is int and type(index[1]) is int:
+         #   self[index] = value
+        #else: super().__setattr__(name, value)
        
+
 class matrix_iter:
     def __init__(self, matrix):
         self._matrix = matrix
@@ -203,16 +207,16 @@ class matrix_iter:
             raise StopIteration("There are no more items in the matrix")
 
 
-a = matrix(3, 3)
-a._0_0=11
-a[0,1]=2
-a[0,2]=3
-a[1,0]=3
-a[1,1]=1
-a[1,2]=1
-a[2,0]=5
-a[2,1]=2
-a[2,2]=1
+a = matrix(3, 3, .0)
+a._0_0=11.0
+a[0,1]=2.0
+a[0,2]=3.0
+a[1,0]=3.0
+a[1,1]=1.0
+a[1,2]=1.0
+a[2,0]=5.0
+a[2,1]=2.0
+a[2,2]=1.0
 print(a)
 print(a._0_0)
 
@@ -225,9 +229,9 @@ b[2,2]=1
 #b[2,0]=6
 #b[2,1]=1
 print(b)
-c = matrix(3,3,1.0)
-print(a*b)
-print(3 in a)
-print(a**2)
-print(c*2.)
-print(c/2.)
+#c = matrix(3,3,1.0)
+print(a/2)
+#print(3 in a)
+#print(a**2)
+#print(c*2.)
+#print(c/2.)
