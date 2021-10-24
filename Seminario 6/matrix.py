@@ -59,11 +59,11 @@ class matrix:
     
     def __mul__(self, o):
         if not isinstance(o, matrix):
-            if isinstance(o, int) or isinstance(o, float):
-                mul = matrix(self.GetRows(),self.GetColumns(),.0)
+            if isinstance(o, self._type):
+                mul = self.Clone()
                 for i in range(self.GetRows()):
                     for j in range(self.GetColumns()):
-                        mul[i,j] = float(self[i,j] * o)
+                        mul[i,j] = self[i,j] * o
                 return mul
             else: raise Exception("Both items must be matrices or a matrix and a scalar")
             
@@ -133,14 +133,12 @@ class matrix:
        return self.GetRows() * self.GetColumns()
 
     def __contains__(self, item):
-        if not isinstance(item, self._type):
-            raise Exception("The element must the same type of the matrix'elements")
-        
         contains = False
-        for i in self:
-            if i == item:
-                contains = True
-                break
+        if isinstance(item, self._type):
+            for i in self:
+                if i == item:
+                    contains = True
+                    break
         return contains
 
     
@@ -205,7 +203,7 @@ class matrix_iter:
             raise StopIteration("There are no more items in the matrix")
 
 
-a = matrix(3, 3, 0)
+a = matrix(3, 3)
 a._0_0=11
 a[0,1]=2
 a[0,2]=3
@@ -218,7 +216,7 @@ a[2,2]=1
 print(a)
 print(a._0_0)
 
-b = matrix(3, 3, 0)
+b = matrix(3, 3)
 b[0,0]=1
 b[1,1]=1
 b[2,2]=1
@@ -227,9 +225,9 @@ b[2,2]=1
 #b[2,0]=6
 #b[2,1]=1
 print(b)
-c = matrix(3,3,'c')
+c = matrix(3,3,1.0)
 print(a*b)
 print(3 in a)
 print(a**2)
-print(c*2)
-print(a/2)
+print(c*2.)
+print(c/2.)
