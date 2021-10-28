@@ -29,7 +29,7 @@ class matrix:
         return mclone
     
     def Transpose(self):
-        transpose = matrix(self.GetColumns(), self.GetRows())
+        transpose = matrix(self.GetColumns(), self.GetRows(), self._initial)
         transpose._matrix = [
             [self._matrix[i][j] for i in range(self.GetColumns())] 
             for j in range(self.GetRows())]
@@ -51,7 +51,7 @@ class matrix:
         return sum_matrix
 
     def __sub__(self, o):
-        neg = matrix(self.GetRows(), self.GetColumns())
+        neg = matrix(self.GetRows(), self.GetColumns(), o._initial)
         neg._matrix = [
             [(-1 * o._matrix[i][j]) for j in range(self.GetColumns())] 
             for i in range(self.GetRows())]
@@ -69,8 +69,7 @@ class matrix:
             
         elif self.GetColumns() != o.GetRows():
             raise Exception("The matrices cannot be multiplied(check the dimensions)")
-        
-        mul = matrix(self.GetRows(), o.GetColumns())
+        mul = matrix(self.GetRows(), o.GetColumns(), self._initial)
         for i in range(mul.GetRows()):
             for j in range(mul.GetColumns()):
                 c = [o[k, j] for k in range(o.GetRows())]
@@ -158,7 +157,7 @@ class matrix:
                 raise Exception("The index must be integers")
             if item[0] < 0 or item[0] >= self.GetRows() or item[1] < 0 or item[1] >= self.GetColumns():
                 raise Exception("Index out of range") 
-            if self._type != type(value):
+            if type(self._initial) != type(value):
                 raise Exception("Diferents types")
             self._matrix[item[0]][item[1]] = value
             return
@@ -181,11 +180,6 @@ class matrix:
             index = [int(i) for i in inpt]
             self[index] = value
         except: super().__setattr__(name, value)
-
-        #if len(index) == 2 and type(index[0]) is int and type(index[1]) is int:
-         #   self[index] = value
-        #else: super().__setattr__(name, value)
-       
 
 class matrix_iter:
     def __init__(self, matrix):
@@ -235,3 +229,4 @@ print(a/2)
 #print(a**2)
 #print(c*2.)
 #print(c/2.)
+print(a**2)
