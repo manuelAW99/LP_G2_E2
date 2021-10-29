@@ -35,6 +35,13 @@ class matrix:
             for j in range(self.GetRows())]
         return transpose
 
+    def AsType(self, ntype):
+        nmatrix = matrix(self.GetRows(), self.GetColumns(), ntype(self._initial))
+        for i in range(nmatrix.GetRows()):
+            for j in range(nmatrix.GetColumns()):
+                nmatrix[i,j] = ntype(self[i,j])
+        return nmatrix
+        
     # Operators   
     def __add__(self, o):
         if not isinstance(o, matrix):
@@ -82,7 +89,13 @@ class matrix:
         return mul
 
     def __truediv__(self, o):
-        return self * (1/o)
+        try:
+            div = 1/o
+        except: raise Exception("Is it not possible to divide by %s" %(str(o)))
+        if isinstance(self._initial, float):
+            return self * div
+        else:
+            return self.AsType(float) * div
     
     def __pow__(self, exponent):
         if not isinstance(exponent, int):
@@ -166,16 +179,18 @@ class matrix:
     
     # Attributes
     def __getattr__(self, item):
-        inpt = item.split("_")[1:]
+        inpt = item.split("_")
+        if inpt[0] == 'as':
+            ntype = eval(inpt[1])
+            return self.AsType(ntype)
         index = []
 
-        try: index = [int(i) for i in inpt]
+        try: index = [int(i) for i in inpt[1:]]
         except: raise Exception("The index must be integers")       
         return self[index]
     
     def __setattr__(self, name, value):
         inpt = name.split("_")[1:]
-
         try: 
             index = [int(i) for i in inpt]
             self[index] = value
@@ -230,3 +245,6 @@ print(a/2)
 #print(c*2.)
 #print(c/2.)
 print(a**2)
+print(a.as_int/6)
+print(a.as_int)
+print(a)
