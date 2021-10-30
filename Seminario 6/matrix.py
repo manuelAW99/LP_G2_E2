@@ -12,14 +12,13 @@ class matrix:
         self._type = type(initial)
         self._matrix = [[initial for i in range(columns)] for j in range(rows)]
     
-    def GetRows(self):
-        return self._rows
+    def __call__(self): return self
     
-    def GetColumns(self):
-        return self._columns
+    def GetRows(self): return self._rows
     
-    def IsSquare(self):
-        return self._rows == self._columns
+    def GetColumns(self): return self._columns
+    
+    def IsSquare(self): return self._rows == self._columns
     
     def Clone(self):
         mclone = matrix(self.GetRows(), self.GetColumns(), self._initial)
@@ -141,8 +140,7 @@ class matrix:
                 else: string += ']\n'
         return string
     
-    def __len__(self):
-       return self.GetRows() * self.GetColumns()
+    def __len__(self): return self.GetRows() * self.GetColumns()
 
     def __contains__(self, item):
         contains = False
@@ -180,11 +178,14 @@ class matrix:
     # Attributes
     def __getattr__(self, item):
         inpt = item.split("_")
-        if inpt[0] == 'as':
-            ntype = eval(inpt[1])
-            return self.AsType(ntype)
-        index = []
 
+        if inpt[0] == 'as':
+            try: 
+                ntype = eval(inpt[1])
+                return self.AsType(ntype)
+            except: raise Exception("Undefined type: %s" %inpt[1])
+
+        index = []
         try: index = [int(i) for i in inpt[1:]]
         except: raise Exception("The index must be integers")       
         return self[index]
@@ -245,6 +246,6 @@ print(a/2)
 #print(c*2.)
 #print(c/2.)
 print(a**2)
-print(a.as_int/6)
-print(a.as_int)
+print(a.as_int()/6)
+print(a.as_intg())
 print(a)
