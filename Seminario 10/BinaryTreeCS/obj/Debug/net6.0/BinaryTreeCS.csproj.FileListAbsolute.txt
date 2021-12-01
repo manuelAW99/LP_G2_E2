@@ -1,0 +1,15 @@
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/obj/Debug/net6.0/BinaryTreeCS.csproj.AssemblyReference.cache
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/obj/Debug/net6.0/BinaryTreeCS.GeneratedMSBuildEditorConfig.editorconfig
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/obj/Debug/net6.0/BinaryTreeCS.AssemblyInfoInputs.cache
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/obj/Debug/net6.0/BinaryTreeCS.AssemblyInfo.cs
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/obj/Debug/net6.0/BinaryTreeCS.csproj.CoreCompileInputs.cache
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/bin/Debug/net6.0/BinaryTreeCS
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/bin/Debug/net6.0/BinaryTreeCS.deps.json
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/bin/Debug/net6.0/BinaryTreeCS.runtimeconfig.json
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/bin/Debug/net6.0/BinaryTreeCS.dll
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/bin/Debug/net6.0/ref/BinaryTreeCS.dll
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/bin/Debug/net6.0/BinaryTreeCS.pdb
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/obj/Debug/net6.0/BinaryTreeCS.dll
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/obj/Debug/net6.0/ref/BinaryTreeCS.dll
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/obj/Debug/net6.0/BinaryTreeCS.pdb
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/BinaryTreeCS/obj/Debug/net6.0/BinaryTreeCS.genruntimeconfig.cache

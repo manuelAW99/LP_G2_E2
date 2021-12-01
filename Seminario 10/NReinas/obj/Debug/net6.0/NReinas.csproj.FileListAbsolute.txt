@@ -1,0 +1,15 @@
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/bin/Debug/net6.0/NReinas
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/bin/Debug/net6.0/NReinas.deps.json
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/bin/Debug/net6.0/NReinas.runtimeconfig.json
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/bin/Debug/net6.0/NReinas.dll
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/bin/Debug/net6.0/ref/NReinas.dll
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/bin/Debug/net6.0/NReinas.pdb
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/obj/Debug/net6.0/NReinas.csproj.AssemblyReference.cache
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/obj/Debug/net6.0/NReinas.GeneratedMSBuildEditorConfig.editorconfig
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/obj/Debug/net6.0/NReinas.AssemblyInfoInputs.cache
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/obj/Debug/net6.0/NReinas.AssemblyInfo.cs
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/obj/Debug/net6.0/NReinas.csproj.CoreCompileInputs.cache
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/obj/Debug/net6.0/NReinas.dll
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/obj/Debug/net6.0/ref/NReinas.dll
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/obj/Debug/net6.0/NReinas.pdb
+/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/NReinas/obj/Debug/net6.0/NReinas.genruntimeconfig.cache

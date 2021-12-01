@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ESy8Dk3v1h1GqRhuUhLNJgWMXFbT/Nol2AN3tQR4fX2lPQdKsVZiapaGGBxEIbvNaRNc5NKlxmscM+rJzsbN6Q==",
+  "success": true,
+  "projectFilePath": "/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/FNReinasRC/FNReinasRC.fsproj",
+  "expectedPackageFiles": [
+    "/root/.nuget/packages/fsharp.core/6.0.1/fsharp.core.6.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

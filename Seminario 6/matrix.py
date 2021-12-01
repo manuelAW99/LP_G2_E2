@@ -12,8 +12,6 @@ class matrix:
         self._type = type(initial)
         self._matrix = [[initial for i in range(columns)] for j in range(rows)]
     
-    def __call__(self): return self
-    
     def GetRows(self): return self._rows
     
     def GetColumns(self): return self._columns
@@ -196,6 +194,8 @@ class matrix:
             index = [int(i) for i in inpt]
             self[index] = value
         except: super().__setattr__(name, value)
+        
+    def __call__(self): return self
 
 class matrix_iter:
     def __init__(self, matrix):
@@ -247,5 +247,5 @@ print(a/2)
 #print(c/2.)
 print(a**2)
 print(a.as_int()/6)
-print(a.as_intg())
-print(a)
+#print(a.as_intg())
+print(a.as_int())

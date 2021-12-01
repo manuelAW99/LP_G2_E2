@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "restore": {
+    "/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/FNReinasRC/FNReinasRC.fsproj": {}
+  },
+  "projects": {
+    "/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/FNReinasRC/FNReinasRC.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/FNReinasRC/FNReinasRC.fsproj",
+        "projectName": "FNReinasRC",
+        "projectPath": "/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/FNReinasRC/FNReinasRC.fsproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/media/manoly/Data/3.2 CC/LP/Seminarios/Semianario 3/FNReinasRC/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/root/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "FSharp.Core": {
+              "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[6.0.1, )",
+              "generatePathProperty": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/147/sdk/6.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
